@@ -14,6 +14,7 @@ function start(){
 
 let turnAngle = 0.1;
 let height = -0.4;
+// Precomputed avg of all vertices, hardcoded for now
 let center = [0.05392258408779177, 1.7236646403291944, -0.0002448559670781888];
 async function displayObj(cv, vertices, faces){
   let then = new Date();
@@ -21,7 +22,7 @@ async function displayObj(cv, vertices, faces){
   ctx = cv.getContext('2d');
   //let drawTriangle = getTriangleDrawer(ctx);
   initHorizLine(ctx);
-  let scl = 200;
+  let scl = min(window.innerWidth, 2*window.innerHeight)/9;
   ctx.scale(scl, -scl);
   ctx.translate(window.innerWidth/400, window.innerHeight/-400 - center[1]);
 
@@ -44,9 +45,9 @@ async function displayObj(cv, vertices, faces){
     //let color = Math.floor((dot(n, [-0.577,0.577,0.577]) + 1) * 255/2);
     /*ctx.fillStyle = `rgb(${color}, ${color}, ${color})`;
     drawTriangle(face[0][0], face[0][1], face[1][0], face[1][1], face[2][0], face[2][1]);*/
-    triangle( scl*(face[0][0]+window.innerWidth/400), -scl*(face[0][1]+window.innerHeight/-400 - center[1]),
-              scl*(face[1][0]+window.innerWidth/400), -scl*(face[1][1]+window.innerHeight/-400 - center[1]),
-              scl*(face[2][0]+window.innerWidth/400), -scl*(face[2][1]+window.innerHeight/-400 - center[1]),
+    triangle( scl*(face[0][0]+window.innerWidth/(2*scl)), -scl*(face[0][1]+window.innerHeight/-(2*scl) - center[1]),
+              scl*(face[1][0]+window.innerWidth/(2*scl)), -scl*(face[1][1]+window.innerHeight/-(2*scl) - center[1]),
+              scl*(face[2][0]+window.innerWidth/(2*scl)), -scl*(face[2][1]+window.innerHeight/-(2*scl) - center[1]),
               [(n[0]+1)*255/2, (n[1]+1)*255/2, (n[2]+1)*255/2, 255]);
 
     // Sleep 1ms to let the canvas refresh between triangles
@@ -90,3 +91,5 @@ function keyPressed(e){
 
   }
 }
+
+min = (a,b) => a < b ? a : b;
