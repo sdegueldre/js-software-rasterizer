@@ -1,8 +1,8 @@
-# A software renderer in javascript
+# Javascript software rasterizer
 
-Renders 3D models using a custom triangle function, the color of the triangles correspond to their normal in world space.
+Renders 3D models using a custom triangle function, the color of the triangles correspond to their normal in world space (RGB = XYZ).
 
-Also contains a module to convert OBJ 3D models to and from pixel data
+I also encoded the 3D model as a png image, which is decoded for rendering, the code is included in [objImgConverter.js](https://github.com/sdegueldre/software-renderer/blob/master/objImgConverter.js)
 
 ![Teapot data encoded as a PNG image](https://sdegueldre.github.io/software-renderer/teapot%20obj.png)
 
